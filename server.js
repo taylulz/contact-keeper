@@ -6,7 +6,7 @@ const app = express();
 //Connect Database 
 connectDB();
 
-// Init Middleware (allows us to use body data in api calls)
+// Init Middleware (allows us to use body data in api calls, included in express now)
 app.use(express.json({ extended: false }));
 
 app.get('/', (req, res) => res.json({msg: 'Welcome to the ContactKeeper API...'}))
