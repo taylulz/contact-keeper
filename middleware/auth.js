@@ -19,7 +19,7 @@ module.exports = function(req, res, next) {
     // pull out payload
     const decoded = jwt.verify(token, config.get('jwtSecret'));
 
-    // Set that user inside the payload to req.user
+    // Set that user inside the payload to req.user so we have access to this inside the route
     req.user = decoded.user;
     next();
   } catch (err) {
