@@ -1,5 +1,5 @@
 import React, { useReducer } from 'react';
-import uuid from 'uuid';
+import {v4 as uuid} from 'uuid';
 import ContactContext from './contactContext';
 import contactReducer from './contactReducer';
 import {
@@ -16,43 +16,37 @@ const ContactState = props => {
   const initialState = {
     contacts: [
       {
-        "_id": "61797cef76fcd92f289c9a73",
-        "user": "6178252692fd255b040eea0a",
-        "name": "Melissa Williams",
-        "email": "MelWill@gmail.com",
-        "phone": "444-444-4444",
-        "type": "personal",
-        "date": "2021-10-27T16:23:11.663Z",
-        "__v": 0
+        id: 1,
+        name: 'Jill Johnson',
+        email: 'jill@gmail.com',
+        phone: '111-111-1111',
+        type: 'personal'
       },
       {
-          "_id": "61797c7a76fcd92f289c9a6a",
-          "user": "6178252692fd255b040eea0a",
-          "name": "Ted Johnson",
-          "email": "tedjohnson@gmail.com",
-          "phone": "222-222-2222",
-          "type": "personal",
-          "date": "2021-10-27T16:21:14.448Z",
-          "__v": 0
+        id: 2,
+        name: 'Sara Watson',
+        email: 'sara@gmail.com',
+        phone: '222-222-2222',
+        type: 'personal'
       },
       {
-          "_id": "61797c5676fcd92f289c9a68",
-          "user": "6178252692fd255b040eea0a",
-          "name": "Sara Smith",
-          "email": "ssmith@gmail.com",
-          "phone": "333-333-3333",
-          "type": "professional",
-          "date": "2021-10-27T16:20:38.676Z",
-          "__v": 0
+        id: 3,
+        name: 'Harry White',
+        email: 'harry@gmail.com',
+        phone: '333-333-333',
+        type: 'professional'
       }
     ]
   };
 
-  // state allows us to access anything in our state , and dispatch allows us to dispatch objects to our reducer
+  // state allows us to access anything in our state , and dispatch allows us to dispatch objects to our reducer. This is where we'll make all requests and dispatch to our reducer what we get back, and then it sends it to the components. 
   const [state, dispatch] = useReducer(contactReducer, initialState);
 
   // Add Contact
-
+  const addContact = contact => {
+    contact.id = uuid();
+    dispatch({ type: ADD_CONTACT, payload: contact });
+  };
 
   // Delete Contact
 
@@ -74,12 +68,14 @@ const ContactState = props => {
   return (
     // anything we want to be able to acces (e.g. state and actions) go here
     <ContactContext.Provider
-     value={{
-      contacts: state.contacts
-     }}>
-      { props.children }
+      value={{
+        contacts: state.contacts,
+        addContact
+      }}
+     >
+      {props.children}
     </ContactContext.Provider>
-  )
+  );
 };
 
 export default ContactState;
