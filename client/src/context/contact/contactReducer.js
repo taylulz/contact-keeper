@@ -8,6 +8,7 @@ import {
   CLEAR_FILTER
 } from '../types';
 
+// eslint-disable-next-line import/no-anonymous-default-export
 export default (state, action) => {
   switch(action.type) {
     case ADD_CONTACT:
@@ -35,6 +36,19 @@ export default (state, action) => {
         ...state,
         current: null
       };
+    case FILTER_CONTACTS:
+      return {
+        ...state,
+        filtered: state.contacts.filter(contact => {
+          const regex = new RegExp(`${action.payload}`, 'gi');
+          return contact.name.match(regex) || contact.email.match(regex);
+        })
+      };
+      case CLEAR_FILTER:
+        return {
+          ...state,
+          filtered: null
+        };
     default: 
       return state;
   }

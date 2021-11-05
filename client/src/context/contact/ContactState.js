@@ -38,7 +38,8 @@ const ContactState = props => {
       }
     ],
     // when we click edit, whatever that contact is, put object in current value spot
-    current: null
+    current: null,
+    filtered: null
   };
 
   // state allows us to access anything in our state , and dispatch allows us to dispatch objects to our reducer. This is where we'll make all requests and dispatch to our reducer what we get back, and then it sends it to the components. 
@@ -71,9 +72,15 @@ const ContactState = props => {
   };
 
   // Filter Contacts
+  const filterContacts = text => {
+    dispatch({ type: FILTER_CONTACTS, payload: text });
+  };
 
 
   // Clear Filter
+  const clearFilter = () => {
+    dispatch({ type: CLEAR_FILTER });
+  };
 
   return (
     // anything we want to be able to acces (e.g. state and actions) go here
@@ -81,11 +88,14 @@ const ContactState = props => {
       value={{
         contacts: state.contacts,
         current: state.current,
+        filtered: state.filtered,
         addContact,
         deleteContact,
         setCurrent,
         clearCurrent,
-        updateContact
+        updateContact,
+        filterContacts,
+        clearFilter
       }}
      >
       {props.children}
