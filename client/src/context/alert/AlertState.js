@@ -4,7 +4,6 @@ import AlertContext from './alertContext';
 import alertReducer from './alertReducer';
 import {
   SET_ALERT,
-  REMOVE,
   REMOVE_ALERT
 } from '../types';
 
@@ -21,8 +20,8 @@ const AlertState = props => {
       payload: { msg, type, id }
     });
 
-    setTimeout(() => dispatch({ tyep: REMOVE_ALERT, payload: id }), timeout)
-  }
+    setTimeout(() => dispatch({ type: REMOVE_ALERT, payload: id }), timeout);
+  };
 
   return (
     // anything we want to be able to acces (e.g. state and actions) go here
@@ -30,8 +29,7 @@ const AlertState = props => {
       value={{
         alerts: state,
         setAlert 
-      }}
-     >
+      }}>
       {props.children}
     </AlertContext.Provider>
   );
