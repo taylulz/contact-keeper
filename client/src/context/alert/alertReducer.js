@@ -1,3 +1,4 @@
+/* eslint-disable import/no-anonymous-default-export */
 import { SET_ALERT, REMOVE_ALERT } from "../types";
 
 export default (state, action) => {
@@ -5,7 +6,7 @@ export default (state, action) => {
     case SET_ALERT:
       return [...state, action.payload]
     case REMOVE_ALERT:
-      return state.filter(alert => alert.id != action.payload);
+      return state.filter(alert => alert.id !== action.payload);
     default:
       return state;
   }
